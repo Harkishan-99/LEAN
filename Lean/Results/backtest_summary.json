@@ -1,0 +1,28 @@
+{
+  "backtest_period": {
+    "start_date": "2015-03-01",
+    "end_date": "2015-12-31"
+  },
+  "performance": {
+    "initial_capital": 100000,
+    "final_portfolio_value": 95520.16668701172,
+    "total_return_percent": -4.479833312988282,
+    "final_cash": 49207.50605010986
+  },
+  "positions": {
+    "ADANIENT": {
+      "quantity": 345,
+      "avg_price": 44.460296630859375
+    },
+    "ASIANPAINT": {
+      "quantity": 23,
+      "avg_price": 793.7957763671875
+    },
+    "AMBUJACEM": {
+      "quantity": 70,
+      "avg_price": 173.92169189453125
+    }
+  },
+  "trade_count": 441,
+  "generated_at": "2025-07-05T21:35:08.169919"
+}
