@@ -5,14 +5,17 @@ services:
     image: quantconnect/lean:latest
     container_name: lean-backtest
     volumes:
-      - ./Lean/Algorithm.Python:/Lean/Algorithm.Python
-      - ./Lean/Data:/Lean/Data
+      - ./Lean/Algorithm.Python:/Lean/Algorithm.Python:ro
+      - ./Lean/Data:/Lean/Data:ro
       - ./Lean/Results:/Results
-      - ./config.json:/Lean/config.json
+      - ./config.json:/Lean/config.json:ro
     working_dir: /Lean
     command: dotnet QuantConnect.Lean.Launcher.dll
     environment:
       - LEAN_CONFIG_FILE=/Lean/config.json
+      - QC_JOB_USER_ID=0
+      - QC_API_ACCESS_TOKEN=""
+      - QC_JOB_ORGANIZATION_ID=""
     networks:
       - lean-network
 

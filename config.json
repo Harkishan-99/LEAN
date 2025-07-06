@@ -20,7 +20,7 @@
   "data-permission-manager": "QuantConnect.DataPermissionManager",
   "object-store": "QuantConnect.Lean.Engine.Storage.LocalObjectStore",
   "data-aggregator": "QuantConnect.Lean.Engine.DataFeeds.AggregationManager",
-  "show-missing-data-logs": false,
+  "show-missing-data-logs": true,
   "maximum-data-points-per-chart-series": 4000,
   "maximum-chart-series": 30,
   "force-exchange-always-open": false,
