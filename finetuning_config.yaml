@@ -1,0 +1,104 @@
+# DeepSeek R1 Fine-tuning Configuration for LEAN Algorithm Generation
+# =====================================================================
+
+# Model Configuration
+model:
+  name: "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"  # Use distilled version for efficiency
+  max_length: 4096
+  torch_dtype: "float16"
+  cache_dir: "./model_cache"
+
+# QLoRA Configuration
+lora:
+  r: 16                    # Rank of adaptation
+  lora_alpha: 32          # LoRA scaling parameter
+  target_modules:         # Target modules for LoRA
+    - "q_proj"
+    - "v_proj" 
+    - "k_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  lora_dropout: 0.1       # Dropout for LoRA layers
+  bias: "none"            # Bias configuration
+  task_type: "CAUSAL_LM"  # Task type
+
+# Training Configuration
+training:
+  output_dir: "./deepseek-lean-finetuned"
+  num_train_epochs: 3
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 2e-4
+  weight_decay: 0.01
+  warmup_steps: 100
+  logging_steps: 10
+  save_steps: 500
+  evaluation_strategy: "steps"
+  eval_steps: 500
+  save_total_limit: 3
+  fp16: true
+  bf16: false
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_loss"
+  greater_is_better: false
+  dataloader_num_workers: 4
+  remove_unused_columns: false
+  gradient_checkpointing: true
+
+# Dataset Configuration
+dataset:
+  train_file: "lean_training_dataset.json"
+  val_split: 0.1
+  max_samples: 1000
+  shuffle_seed: 42
+  preprocessing:
+    max_prompt_length: 512
+    max_response_length: 3584
+    truncation_side: "left"
+
+# Quantization Configuration
+quantization:
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "float16"
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_use_double_quant: true
+
+# Generation Configuration (for inference)
+generation:
+  max_length: 2048
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  do_sample: true
+  num_return_sequences: 1
+  repetition_penalty: 1.1
+
+# Monitoring Configuration
+monitoring:
+  wandb:
+    enabled: false
+    project: "deepseek-lean-finetuning"
+    entity: null
+    tags: ["deepseek", "lean", "algorithmic-trading"]
+  tensorboard:
+    enabled: true
+    log_dir: "./logs"
+
+# Hardware Configuration
+hardware:
+  use_gpu: true
+  device_map: "auto"
+  torch_compile: false
+  flash_attention: false
+
+# Data Augmentation
+data_augmentation:
+  enabled: true
+  techniques:
+    - "paraphrase_prompts"
+    - "vary_parameters"
+    - "add_noise_to_numbers"
+  augmentation_ratio: 0.2
