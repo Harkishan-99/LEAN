@@ -1,0 +1,45 @@
+# DeepSeek R1 Fine-tuning for LEAN Backtesting
+# ============================================
+
+# Core ML and Training Dependencies
+torch>=2.0.0
+transformers>=4.35.0
+peft>=0.7.0
+datasets>=2.14.0
+bitsandbytes>=0.41.0
+accelerate>=0.24.0
+
+# Training Monitoring and Logging
+wandb>=0.16.0
+tensorboard>=2.14.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Configuration Management
+PyYAML>=6.0
+python-dotenv>=1.0.0
+
+# Code Analysis and Validation
+ast-tools>=0.3.0
+black>=23.0.0
+flake8>=6.0.0
+
+# System and File Operations
+tqdm>=4.65.0
+psutil>=5.9.0
+
+# Optional: For enhanced performance
+# xformers>=0.0.20  # Uncomment if using compatible CUDA version
+# flash-attn>=2.0.0  # Uncomment for flash attention support
+
+# Development and Testing
+pytest>=7.4.0
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Docker and Infrastructure (if using containerized training)
+docker>=6.1.0
+docker-compose>=1.29.0
